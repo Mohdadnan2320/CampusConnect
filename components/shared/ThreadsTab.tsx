@@ -1,3 +1,6 @@
+import { fetchUserPosts } from "@/lib/actions/user.actions";
+import ThreadCard from "@/components/cards/ThreadCard";
+
 interface Props {
   currentUserId: string;
   accountId: string;
@@ -5,9 +8,27 @@ interface Props {
 }
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
-  //  TODO: Fetch Profile Threads
+  let result = await fetchUserPosts(accountId);
 
-    return <section>ThreadTabs</section>;
+  if (!result) redirect("/");
+
+  return (
+    <section className="mt-9 flex flex-col gap-10">
+      {result.threads.map((thread) => (
+        <ThreadCard
+          key={thread._id}
+          id={thread._id}
+          currentUserId={currentUserId}
+          parentId={thread.parentId}
+          content={thread.text}
+          author={thread.author} // TODO
+          community={thread.community} // TODO
+          createdAt={thread.createdAt}
+          comments={thread.children}
+        />
+      ))}
+    </section>
+  );
 };
 
 export default ThreadsTab;
