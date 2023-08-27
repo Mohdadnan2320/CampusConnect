@@ -1,5 +1,6 @@
 import { fetchUserPosts } from "@/lib/actions/user.actions";
 import ThreadCard from "@/components/cards/ThreadCard";
+import { redirect } from "next/navigation";
 
 interface Props {
   currentUserId: string;
