@@ -21,6 +21,8 @@ async function Page({ params }: { params: { id: string } }) {
         imgUrl={userInfo.image}
         bio={userInfo.bio}
       />
+
+      <div className="mt-9"></div>
     </section>
   );
 }
